@@ -1,30 +1,44 @@
 import { Component, OnInit } from '@angular/core';
 
 import { GamesPage } from '../games/games.page';
+import { FormBuilder, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth.service';
+import { AlertController, LoadingController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
-//   template: `
-//   <ion-header>
-//     <ion-toolbar>
-//       <ion-title>Page One</ion-title>
-//     </ion-toolbar>
-//   </ion-header>
-//   <ion-content class="ion-padding">
-//     <h1>Page One</h1>
-//     <ion-nav-link router-direction="forward" [component]="component">
-//       <ion-button>Go to Page Two</ion-button>
-//     </ion-nav-link>
-//   </ion-content>
-// `,
+
 })
 export class LoginPage implements OnInit {
+  credentials = this.fb.nonNullable.group({
+    email: ['Example@gmail.com', Validators.required],
+    password: ['Pancakes25', Validators.required],
+  });
 
-  constructor() { }
+  constructor(
+    private fb: FormBuilder,
+     private authService: AuthService, 
+     private loadingController: LoadingController, 
+     private alertController: AlertController, 
+     private router: Router
+     ) { }
+
+     get email(){
+      return this.credentials.controls.email;
+     }
+
+     get password(){
+      return this.credentials.controls.password;
+     }
 
   ngOnInit() {
+  }
+
+  async login(){
+    
   }
 
 }
